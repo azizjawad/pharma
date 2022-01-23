@@ -30,11 +30,14 @@ check_remember_me();
 
     <link rel="stylesheet" href="../assets/vendor/bootstrap-4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/vendor/fontawesome-5.12.0/css/all.min.css">
- 
     <!-- Custom styles -->
     <link rel="stylesheet" href="../assets/css/app.css">
     <link rel="stylesheet" href="custom.css" >
-
+    <script src="../assets/vendor/js/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="../assets/vendor/js/popper.min.js"></script>
+    <script src="../assets/vendor/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
 </head>
 
 <body>

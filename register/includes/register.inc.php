@@ -176,7 +176,7 @@ if (isset($_POST['signupsubmit'])) {
         } 
         else {
 
-            $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
+            $hashedPwd = md5($password);
 
             mysqli_stmt_bind_param($stmt, "sssssssss", $username, $email, $hashedPwd, $full_name, $last_name, $gender, $headline, $bio, $FileNameNew);
             mysqli_stmt_execute($stmt);

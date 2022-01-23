@@ -266,3 +266,9 @@ footer {
     margin-top: 10px;
     line-height: 25px;
 }
+video::-webkit-media-controls-fullscreen-button {
+    display: none;
+}
+.error{
+    color: red;
+}

@@ -50,19 +50,15 @@ function check_logged_out() {
 function check_verified() {
 
     if (isset($_SESSION['auth'])) {
-
-        if ($_SESSION['auth'] == 'verified') {
-
+//        if ($_SESSION['auth'] == 'verified') {
             return true;
-        }
-        elseif ($_SESSION['auth'] == 'loggedin') {
-
-            header("Location: ../verify/");
-            exit(); 
-        }
+//        }
+//        elseif ($_SESSION['auth'] == 'loggedin') {
+//            header("Location: ../verify/");
+//            exit();
+//        }
     }
     else {
-
         header("Location: ../login/");
         exit();
     }

@@ -100,7 +100,7 @@ else {
 
             if ($row = mysqli_fetch_assoc($result)) {
 
-                $pwdCheck = password_verify($password, $row['password']);
+                $pwdCheck = (md5($password) == $row['password']);
 
                 if ($pwdCheck == false) {
 
@@ -185,7 +185,7 @@ else {
                         }
                         else {
                             
-                            $hashedToken = password_hash($token, PASSWORD_DEFAULT);
+                            $hashedToken = md5($token);
                             mysqli_stmt_bind_param($stmt, "ssss", $_SESSION['email'], $selector, $hashedToken, date('Y-m-d\TH:i:s', time() + 864000));
                             mysqli_stmt_execute($stmt);
                         }
