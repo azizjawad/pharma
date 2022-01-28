@@ -16,29 +16,14 @@ check_verified();
                 </div>
                 <br>
                 <div class="text-center text-muted mb-5">
-                    <h2>Lorem Impsum is simply a dummy text</h2>
+                    <h2>We are honoured to have you doing the inauguration!</h2>
                     <hr width="300">
                 </div>
 
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-sm-12 col-xs-12">
                         <div class="card mb-6">
-                            <video style="object-fit: cover" controlsList="nodownload" id="myVideo" width="100%" height="400" controls>
-                                <source src="../assets/uploads/senziryl.mp4" type="video/mp4">
-                                Your browser does not support HTML5 video.
-                            </video>
-                            <!--                        <img class="card-img-top" src='../assets/images/repo_gitklik.png' alt="Card image cap">-->
-
-                            <!--                        <div class="card-body">-->
-                            <!--                            <p class="card-text">Version Control application in Laravel using Git for core operationality.</p>-->
-                            <!--                            <div class="d-flex justify-content-between align-items-center">-->
-                            <!--                                <div class="btn-group">-->
-                            <!--                                    <a href="https://github.com/msaad1999/GitKLiK" class="btn btn-sm btn-outline-secondary" target="_blank">View</a>-->
-                            <!--                                    <a href="https://github.com/msaad1999/GitKLiK/archive/master.zip" class="btn btn-sm btn-outline-secondary" target="_blank">Download</a>-->
-                            <!--                                </div>-->
-                            <!--                                <small class="text-muted">[under development]</small>-->
-                            <!--                            </div>-->
-                            <!--                        </div>-->
+                            <div id="ytplayer"></div>
                         </div>
                     </div>
 
@@ -141,15 +126,66 @@ check_verified();
             </div>
         </div>
     </main>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
-        var vid = document.getElementById("myVideo");
-        console.log($('#pharma-form'));
-        vid.onended = function() {
-            $('#pharma-modal').modal('show');
-        };
+        // Load the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/player_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
+        // Replace the 'ytplayer' element with an <iframe> and
+        // YouTube player after the API code downloads.
+        var player;
+        function onYouTubePlayerAPIReady() {
+            player = new YT.Player('ytplayer', {
+                height: '400',
+                width: '100%',
+                videoId: 'HGRlV066thg',
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'rel' : 0,
+                    'fs' : 0,
+                },
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+        function onPlayerStateChange(event) {
+            if (event.data == YT.PlayerState.ENDED) {
+                $('#pharma-modal').modal('show');
+            }
+        }
         $(document).ready(function (){
-            $('#pharma-form').validate();
-        })
+            $('#pharma-form').validate({
+                rules:{
+
+                },
+                submitHandler: function (){
+                    let form = $('#pharma-form').serialize();
+                    $.ajax({
+                        url: 'pharma-form-submit.php',
+                        type: "post",
+                        data: form,
+                        success: function (res){
+                            let data = JSON.parse(res);
+                            if (data.status === true){
+                                $('#pharma-form')[0].reset();
+                                swal("Success!", "Your details has been submitted successfully!", "success");
+                                $('#pharma-modal').modal('hide');
+                            }else{
+                                swal("Opps!", "Something went wrong please try again!", "error");
+                            }
+                        },
+                        error: function (){
+                            swal("Opps!", "Something went wrong please try again!", "error");
+                        }
+                    })
+                }
+            });
+        });
     </script>
+
 <?php include '../assets/layouts/footer.php' ?>

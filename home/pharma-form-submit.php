@@ -41,5 +41,4 @@ if (isset($_POST['title']) && isset($_POST['name']) && isset($_POST['clinic_name
         mysqli_stmt_store_result($stmt);
     }
 }
-header( 'location: /pharma/home');
-
+echo json_encode(["status" => true]);
