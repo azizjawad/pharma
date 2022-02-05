@@ -17,7 +17,7 @@ else {
 
     /*
     * -------------------------------------------------------------------------------
-    *   Securing against Header Injections
+    *   Securing against Header Injection
     * -------------------------------------------------------------------------------
     */
 
@@ -109,15 +109,13 @@ else {
                     exit();
                 } 
                 else if ($pwdCheck == true) {
-
-                    session_start();
-
-                    if (!isset($row['user_level']) || $row['user_level'] != 0) {
+                    if (!isset($row['user_level']) || $row['user_level'] != 1) {
                         header("Location: ../");
                         $_SESSION['ERRORS']['wrongpassword'] = 'User is not authorised';
                         exit();
                     }
-                    
+                    session_start();
+
                     if($row['verified_at'] != NULL){
 
                         $_SESSION['auth'] = 'verified';
@@ -196,7 +194,7 @@ else {
                         }
                     }
 
-                    header("Location: ../../home/");
+                    header("Location: ../../admin/dashboard/");
                     exit();
                 } 
             } 

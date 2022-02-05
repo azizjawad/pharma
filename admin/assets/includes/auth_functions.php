@@ -49,11 +49,16 @@ function check_logged_out() {
 
 function check_verified() {
 
-    if (isset($_SESSION['auth']) && $_SESSION['user_level'] == 0) {
-        return true;
+    if (isset($_SESSION['auth'])) {
+//        if ($_SESSION['auth'] == 'verified') {
+            return true;
+//        }
+//        elseif ($_SESSION['auth'] == 'loggedin') {
+//            header("Location: ../verify/");
+//            exit();
+//        }
     }
     else {
-        session_destroy();
         header("Location: ../login/");
         exit();
     }
@@ -63,7 +68,6 @@ function check_admin_verified() {
     if (isset($_SESSION['auth']) && $_SESSION['user_level'] == 1) {
         return true;
     } else {
-        session_destroy();
         header("Location: ../admin/");
         exit();
     }
